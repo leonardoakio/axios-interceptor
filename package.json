@@ -1,0 +1,46 @@
+{
+  "name": "axios-interceptor",
+  "version": "1.0.1",
+  "description": "Axios interceptor to validate auth tokens from every request",
+  "main": "api.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:npm": "vue-cli-service build --target lib --name axios-interceptor api.js && cp package.json dist/",
+    "lint": "vue-cli-service lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonardoakio/axios-interceptor.git"
+  },
+  "keywords": [
+    "axios",
+    "interceptor",
+    "authentication",
+    "tokens"
+  ],
+  "author": "Leonardo Akio <akioleonardo@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "js-cookie": "^3.0.1",
+    "dayjs": "^1.10.8"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2018
+    },
+    "rules": {}
+  },
+  "files": [
+    "api.js",
+    "package.json"
+  ]
+}
