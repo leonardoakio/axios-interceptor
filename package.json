@@ -4,10 +4,9 @@
   "description": "Axios interceptor to validate auth tokens from every request",
   "main": "api.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build:npm": "vue-cli-service build --target lib --name axios-interceptor api.js && cp package.json dist/",
-    "lint": "vue-cli-service lint"
+    "dev": "VITE_API_URL=http://template-api VITE_TECBASE_API_URL=http://template-api vite --port 8082",
+    "build": "VITE_API_URL=https://template.com.br VITE_TECBASE_API_URL=https://template.com.br vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
