@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
+import { parseJwt } from './helpers/jwtdecoder';
 
 const frontURL = "http://localhost:8081/";
 const baseURL = "http://localhost:8080/";
@@ -22,17 +23,14 @@ api.interceptors.request.use(async req => {
 
    if (!accessToken || accessToken === 'undefined') {
       if (!refreshToken || refreshToken === 'undefined') {
-         window.location.href = `${frontURL}invoice`;
+         goTo('login');
          return req;
       }
 
-      const isRefreshTokenExpired = (refreshToken) => {
-         const decodedToken = JSON.parse(Buffer.from(refreshToken.split('.')[1], 'base64').toString());
-         return Date.now() >= decodedToken.exp * 1000;
-      };
+      const decodedToken = parseJwt(refreshToken);
 
-      if (isRefreshTokenExpired) {
-         window.location.href = `${frontURL}invoice`;
+      if (Date.now() >= decodedToken.exp * 1000) {
+         goTo('login');
          return req;
       }
 
@@ -44,14 +42,13 @@ api.interceptors.request.use(async req => {
       Cookies.set('access_token', response.data.access_token, { expires: new Date(Date.now() + 5 * 60 * 1000) });
    }
 
-   if (!refreshToken) {
-      window.location.href = `${frontURL}invoice`;
-      return req;
-   }
-
    // eslint-disable-next-line require-atomic-updates
    req.headers.Authorization = `Bearer ${accessToken}`; // Define Authorization antes de retornar req
    return req;
 });
+
+function goTo(url) {
+   window.location.href = `${frontURL}`+url;
+}
 
 export default api;
